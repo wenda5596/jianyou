@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+		<link rel="stylesheet" type="text/css" href="css/jianyou.css" />
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jQuery-ui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/moment.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KB2Z5sBLjSfXDBGhzfbN9Gl7VIHpegtd"></script>
+		<script src="js/rent.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="top_container w ha oh">
+			<div class="top_content w">
+				<div class="top ma">
+					<img src="img/toplogo.png" alt="加载中" title="简游" />
+					<div class="top_search fl">
+						<input type="text" name="searchtext" id="searchtext" value="" placeholder="请输入搜索内容" />
+						<p>搜索</p>
+					</div>
+					<div class="top_account">
+						<img src="img/top_qq.png" alt="加载中" title="简游" />
+						<img src="img/top_weixin.png" alt="加载中" title="简游" />
+						<img class="sina_adjust" src="img/top_sina.png" alt="加载中" title="简游" />
+						<div class="login">登录</div>
+						<div class="register">注册</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="nav_container w ha oh">
+			<div class="nav_content w">
+				<div class="nav ma">
+					<ul>
+						<li>
+							<a href="index.html">首页</a>
+						</li>
+
+						<li>
+							<a href="train.html">火车票</a>
+						</li>
+						<li>
+							<a href="bus.html">汽车票</a>
+						</li>
+						<li>
+							<a href="rent.html">用车</a>
+						</li>
+
+						<li>
+							<a href="inlhotel.html">国内酒店</a>
+						</li>
+						<li>
+							<a href="inthotel.html">国际酒店</a>
+						</li>
+						<li>
+							<a href="apartment.html">短租公寓</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="banner_container w ha oh">
+			<div class="banner_content w">
+				<div id="banner">
+					<div id="bannerbox">
+						<img src="img/rentbanner1.jpg" alt="加载中" title="简游" />
+						<img src="img/rentbanner2.jpg" alt="加载中" title="简游" />
+						<img src="img/rentbanner3.jpg" alt="加载中" title="简游" />
+					</div>
+					<div id="btn">
+						<img id="left" src="img/向左.png" alt="加载中" title="简游" />
+						<img id="right" src="img/向右.png" alt="加载中" title="简游" />
+					</div>
+					<div id="cycle">
+						<div class="on"></div>
+						<div></div>
+						<div></div>
+					</div>
+					<div class="rentsearch pr">
+						<div class="renttab pr">
+							<div class="renttabbox pr">
+								<div class="rentboxshadow"></div>
+								<div class="rentboxinner pa">
+									<div></div>
+									<p>国内租车</p>
+									<p>&gt;</p>
+								</div>
+							</div>
+							<div class="renttabbox pr">
+								<div class="rentboxshadow"></div>
+								<div class="rentboxinner pa">
+									<div></div>
+									<p>国际租车</p>
+									<p>&gt;</p>
+								</div>
+							</div>
+							<div class="renttabbox pr">
+								<div class="rentboxshadow"></div>
+								<div class="rentboxinner pa">
+									<div></div>
+									<p>国内接送机</p>
+									<p>&gt;</p>
+								</div>
+							</div>
+							<div class="renttabbox pr">
+								<div class="rentboxshadow"></div>
+								<div class="rentboxinner pa">
+									<div></div>
+									<p>国外接送机</p>
+									<p>&gt;</p>
+								</div>
+							</div>
+							<div class="renttabbox pr">
+								<div class="rentboxshadow"></div>
+								<div class="rentboxinner pa">
+									<div></div>
+									<p>日租包车</p>
+									<p>&gt;</p>
+								</div>
+							</div>
+						</div>
+						<div class="rentinput">
+							<div class="renttxtbox">
+								<div class="renttxtbox-title">
+									国内租车
+								</div>
+								<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+								<div id="l-map"></div>
+								<div class="rentposition">
+									<p>取车地点</p>
+									<div id="r-result">
+										<input type="text" id="suggestId1" size="20" placeholder="请输入地址" />
+										<input type="button" class="btn btn-danger mapbtn1" value="">
+									</div>
+								</div>
+								<div class="rentposition">
+									<p>取车地点</p>
+									<div id="r-result">
+										<input type=" text" id="suggestId2" size="20" placeholder="请输入地址" />
+										<input type="button" class="btn btn-danger mapbtn2" value="">
+									</div>
+								</div>
+								<div class="renttxt">
+									<p>取车时间</p>
+									<input type="text" name="rentstart" id="rentstart" value="" />
+									<input type="text" name="datepicker5" id="datepicker5" value="" />
+									<input type="text" name="rentstarth" id="rentstarth" value="" />
+									<select id="startsel">
+										<option>0:00</option>
+										<option>1:00</option>
+										<option>2:00</option>
+										<option>3:00</option>
+										<option>4:00</option>
+										<option>5:00</option>
+										<option>6:00</option>
+										<option>7:00</option>
+										<option>8:00</option>
+										<option>9:00</option>
+										<option>10:00</option>
+										<option>11:00</option>
+										<option>12:00</option>
+										<option>13:00</option>
+										<option>14:00</option>
+										<option>15:00</option>
+										<option>16:00</option>
+										<option>17:00</option>
+										<option>18:00</option>
+										<option>19:00</option>
+										<option>20:00</option>
+										<option>21:00</option>
+										<option>22:00</option>
+										<option>23:00</option>
+									</select>
+								</div>
+								<div class="renttxt">
+									<p>还车时间</p>
+									<input type="text" name="rentend" id="rentend" value="" />
+									<input type="text" name="datepicker6" id="datepicker6" value="" />
+									<input type="text" name="rentendh" id="rentendh" value="" />
+									<select id="endsel">
+										<option>0:00</option>
+										<option>1:00</option>
+										<option>2:00</option>
+										<option>3:00</option>
+										<option>4:00</option>
+										<option>5:00</option>
+										<option>6:00</option>
+										<option>7:00</option>
+										<option>8:00</option>
+										<option>9:00</option>
+										<option>10:00</option>
+										<option>11:00</option>
+										<option>12:00</option>
+										<option>13:00</option>
+										<option>14:00</option>
+										<option>15:00</option>
+										<option>16:00</option>
+										<option>17:00</option>
+										<option>18:00</option>
+										<option>19:00</option>
+										<option>20:00</option>
+										<option>21:00</option>
+										<option>22:00</option>
+										<option>23:00</option>
+									</select>
+								</div>
+								<button class="rent-btn">去选车</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!---->
+		<div class="J-shouyebody">
+			<div class="J-yongchetou">
+				<div class="J-yongchetou1 fl">
+					<div class="J-yongchetou11 fl">
+					</div>
+					<div class="J-yongchetou12 fr">
+						<p>想你所想</p>
+						<p>愿为提供最舒心的服务</p>
+					</div>
+					<p class="fl">贴心</p>
+				</div>
+				<div class="J-yongchetou1 fl">
+					<div class="J-yongchetou11 fl">
+					</div>
+					<div class="J-yongchetou12 fr">
+						<p>全途远程服务</p>
+						<p>有问题随叫随到</p>
+					</div>
+					<p class="fl">放心</p>
+				</div>
+				<div class="J-yongchetou1 fl">
+					<div class="J-yongchetou11 fl">
+					</div>
+					<div class="J-yongchetou12 fr">
+						<p>一线租车公司</p>
+						<p>保险安心选</p>
+					</div>
+					<p class="fl">安心</p>
+				</div>
+			</div>
+		</div>
+		<div class="J-yongchebody fl">
+			<div class="J-yongchebody1">
+				<div class="J-yongchebody11 fl"></div>
+				<p class="fl" style="color: white;">热门租车城市</p>
+				<span class="fl" style="margin: 12px 0 0 0;color: white;">国内热门</span>
+				<ul id="yc1" class="fl" style="margin: 12px 0 0 0;">
+					<li>三亚</li>
+					<li>上海</li>
+					<li>北京</li>
+					<li>天津</li>
+					<li>厦门</li>
+					<li>长沙</li>
+					<li>广州</li>
+					<li>云南</li>
+					<li>海口</li>
+					<li>深圳</li><br/>
+					<li style="margin: 21px 10px 0 10px;">首尔</li>
+					<li style="margin: 21px 10px 0 10px;">罗马</li>
+					<li style="margin: 21px 10px 0 10px;">曼谷</li>
+					<li style="width: 50px;margin: 21px 10px 0 10px;">波尔多</li>
+					<li style="width: 50px;margin: 21px 10px 0 10px;">旧金山</li>
+					<li style="width: 50px;margin: 21px 10px 0 10px;">维也纳</li>
+					<li style="width: 50px;margin: 21px 10px 0 10px;">温哥华 </li>
+					<li style="width: 50px;margin: 21px 10px 0 10px;">布拉格</li>
+					<li style="width: 65px;margin: 21px 10px 0 10px;">巴萨罗纳</li>
+					<li style="width: 65px;margin: 21px 10px 0 10px;">佛罗伦萨</li>
+				</ul>
+				<a class="fr" href="#" style="margin: 10px 0 0 0;">&gt;更多</a>
+				<span class="fl" style="margin: -15px 0 0 0;color: white;">国外热门</span>
+				<a class="fr" href="#" style="margin: -15px 0 0 0;">&gt;更多</a>
+				<div class="J-yongchebody12 fl" style="margin: 32px 0 0 -65px;">
+					<div class="J-yongchebody13 fl">
+						<img src="img/yc/qc-1 (2).jpg" alt="" title="" />
+					</div>
+					<div class="J-yongchebody14 fl tc">
+						<p>经济型汽车</p>
+					</div>
+					<p class="fl" style="margin: 35px 0 0 10px;color: #b8b8b8;">手动型</p>
+					<p class="fr" style="margin: 35px 12px 0 0px;color: #b8b8b8;">起</p>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">/天</span>
+					<span class="fr" style="margin: 27px 0 0 0px;font-size: 24px;color: #fc5d1e;">40元</span>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">￥</span>
+				</div>
+				<div class="J-yongchebody12 fl" style="margin: 32px 0 0 15px;">
+					<div class="J-yongchebody13 fl">
+						<img src="img/yc/qc-1 (3).jpg" alt="" title="" />
+					</div>
+					<div class="J-yongchebody14 fl tc">
+						<p>SUV</p>
+					</div>
+					<p class="fl" style="margin: 35px 0 0 10px;color: #b8b8b8;">手动型</p>
+					<p class="fr" style="margin: 35px 12px 0 0px;color: #b8b8b8;">起</p>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">/天</span>
+					<span class="fr" style="margin: 27px 0 0 0px;font-size: 24px;color: #fc5d1e;">75元</span>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">￥</span>
+				</div>
+				<div class="J-yongchebody12 fl" style="margin: 32px 0 0 15px;">
+					<div class="J-yongchebody13 fl">
+						<img src="img/yc/qc-1 (4).jpg" alt="" title="" />
+					</div>
+					<div class="J-yongchebody14 fl tc">
+						<p>舒适型轿车</p>
+					</div>
+					<p class="fl" style="margin: 35px 0 0 10px;color: #b8b8b8;">手动型</p>
+					<p class="fr" style="margin: 35px 12px 0 0px;color: #b8b8b8;">起</p>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">/天</span>
+					<span class="fr" style="margin: 27px 0 0 0px;font-size: 24px;color: #fc5d1e;">158元</span>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">￥</span>
+				</div>
+				<div class="J-yongchebody12 fl" style="margin: 32px 0 0 15px;">
+					<div class="J-yongchebody13 fl">
+						<img src="img/yc/qc-1 (5).jpg" alt="" title="" />
+					</div>
+					<div class="J-yongchebody14 fl tc">
+						<p>7座商务车</p>
+					</div>
+					<p class="fl" style="margin: 35px 0 0 10px;color: #b8b8b8;">手动型</p>
+					<p class="fr" style="margin: 35px 12px 0 0px;color: #b8b8b8;">起</p>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">/天</span>
+					<span class="fr" style="margin: 27px 0 0 0px;font-size: 24px;color: #fc5d1e;">128元</span>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">￥</span>
+				</div>
+				<div class="J-yongchebody12 fl" style="margin: 40px 0 0 0;">
+					<div class="J-yongchebody13 fl">
+						<img src="img/yc/qc-1 (6).jpg" alt="" title="" />
+					</div>
+					<div class="J-yongchebody14 fl tc">
+						<p>豪华型汽车</p>
+					</div>
+					<p class="fl" style="margin: 35px 0 0 10px;color: #b8b8b8;">自动型</p>
+					<p class="fr" style="margin: 35px 12px 0 0px;color: #b8b8b8;">起</p>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">/天</span>
+					<span class="fr" style="margin: 27px 0 0 0px;font-size: 24px;color: #fc5d1e;">330元</span>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">￥</span>
+				</div>
+				<div class="J-yongchebody12 fl" style="margin: 40px 0 0 15px;">
+					<div class="J-yongchebody13 fl">
+						<img src="img/yc/qc-1 (7).jpg" alt="" title="" />
+					</div>
+					<div class="J-yongchebody14 fl tc">
+						<p>客车</p>
+					</div>
+					<p class="fl" style="margin: 35px 0 0 10px;color: #b8b8b8;">手动型</p>
+					<p class="fr" style="margin: 35px 12px 0 0px;color: #b8b8b8;">起</p>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">/天</span>
+					<span class="fr" style="margin: 27px 0 0 0px;font-size: 24px;color: #fc5d1e;">180元</span>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">￥</span>
+				</div>
+				<div class="J-yongchebody12 fl" style="margin: 40px 0 0 15px;">
+					<div class="J-yongchebody13 fl">
+						<img src="img/yc/qc-1 (8).jpg" alt="" title="" />
+					</div>
+					<div class="J-yongchebody14 fl tc">
+						<p>豪华型商务</p>
+					</div>
+					<p class="fl" style="margin: 35px 0 0 10px;color: #b8b8b8;">自动型</p>
+					<p class="fr" style="margin: 35px 12px 0 0px;color: #b8b8b8;">起</p>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">/天</span>
+					<span class="fr" style="margin: 27px 0 0 0px;font-size: 24px;color: #fc5d1e;">480元</span>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">￥</span>
+				</div>
+				<div class="J-yongchebody12 fl" style="margin: 40px 0 0 15px;">
+					<div class="J-yongchebody13 fl">
+						<img src="img/yc/qc-1 (9).jpg" alt="" title="" />
+					</div>
+					<div class="J-yongchebody14 fl tc">
+						<p>豪华轿车</p>
+					</div>
+					<p class="fl" style="margin: 35px 0 0 10px;color: #b8b8b8;">自动型</p>
+					<p class="fr" style="margin: 35px 12px 0 0px;color: #b8b8b8;">起</p>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">/天</span>
+					<span class="fr" style="margin: 27px 0 0 0px;font-size: 24px;color: #fc5d1e;">128元</span>
+					<span class="fr" style="margin: 35px 0 0 0px;color: #fc5d1e;">￥</span>
+				</div>
+			</div>
+		</div>
+		<div class="J-yongchebody2 fl">
+			<div class="J-yongchebody21">
+				<div class="J-yongchebody22 fl"></div>
+				<p class="fl">订购流程</p>
+				<div class="J-yongchebody23 fl">
+					<div class="J-yongchebody231 fl"></div>
+					<div class="J-yongchebody232 fl">
+						<p style="color: #545454;">搜索</p>
+						<p style="margin: 10px 0 0 0;color: #b5b5b5;">选择取车还车时间及地点</p>
+					</div>
+				</div>
+				<div class="J-yongchebody24 fl"></div>
+				<div class="J-yongchebody23 fl" style="margin: 32px 0 0 47px;">
+					<div class="J-yongchebody231 fl" style="background-position: 0 -52px;"></div>
+					<div class="J-yongchebody232 fl">
+						<p style="color: #545454;">选车</p>
+						<p style="margin: 10px 0 0 0;color: #b5b5b5;">选择合适的车型</p>
+					</div>
+				</div>
+				<div class="J-yongchebody24 fl" style="margin: 50px 0 0 0px;"></div>
+				<div class="J-yongchebody23 fl">
+					<div class="J-yongchebody231 fl"></div>
+					<div class="J-yongchebody232 fl">
+						<p style="color: #545454;">填写订单</p>
+						<p style="margin: 10px 0 0 0;color: #b5b5b5;">填写联系人及驾驶员信息</p>
+					</div>
+				</div>
+				<div class="J-yongchebody24 fr" style="margin: 12px 150px 0 0px;height: 46px;background-position: 0 -25px;"></div>
+				<button class="J-yongchebody25 fl">立即订购</button>
+				<div class="J-yongchebody23 fl" style="margin: 62px 0 0 95px;">
+					<div class="J-yongchebody231 fl" style="background-position: 0 -102px;"></div>
+					<div class="J-yongchebody232 fl">
+						<p style="color: #545454;">预订成功</p>
+						<p style="margin: 10px 0 0 0;color: #b5b5b5;">轻松开启旅程</p>
+					</div>
+				</div>
+				<div class="J-yongchebody24 fl" style="margin: 80px 0px 0 0px;background-position: 0 -80px;"></div>
+				<div class="J-yongchebody23 fl" style="margin: 2px 0 0 40px;">
+					<div class="J-yongchebody231 fl" style="background-position: 0 -155px;"></div>
+					<div class="J-yongchebody232 fl">
+						<p style="color: #545454;">提交订单</p>
+						<p style="margin: 10px 0 0 0;color: #b5b5b5;">确定租车信息</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="J-yongchebody3 fl">
+			<div class="yongchebox1">
+				<div class="J-yongchebody31 fl"></div>
+				<p class="fl">用车评价</p>
+			</div>
+			<div class="yongchebox2">
+				<div class="J-yongchebody32 fl">
+					<div class="J-yongchebody321 fl"></div>
+					<div class="J-yongchebody322 fr">
+						<p class="fl" style="width: 158px;">国内接送机</p>
+						<p class="fl" style="width: 140px;">李女士</p>
+						<p class="fr">2017-05-22</p>
+						<p class="fl" style="font-size: 12px;margin: 11px 0 0 0;color: #b0b0b0;">飞机因为天气原因晚点了，可是接车师傅依然没有怨言，很耐心的接到我。</p>
+						<p class="fl" style="font-size: 12px;margin: 11px 0 0 0;color: #b0b0b0;">还帮我把行李搬到了家，服务好赞，棒棒哒！</p>
+					</div>
+				</div>
+				<div class="J-yongchebody32 fr">
+					<div class="J-yongchebody321 fl" style="background-position: 0 -70px;"></div>
+					<div class="J-yongchebody322 fr">
+						<p class="fl" style="width: 158px;">国际租车</p>
+						<p class="fl" style="width: 140px;">董先生</p>
+						<p class="fr">2017-04-22</p>
+						<p class="fl" style="font-size: 12px;margin: 11px 0 0 0;color: #b0b0b0;">飞机因为天气原因晚点了，可是接车师傅依然没有怨言，很耐心的接到我。</p>
+						<p class="fl" style="font-size: 12px;margin: 11px 0 0 0;color: #b0b0b0;">还帮我把行李搬到了家，服务好赞，棒棒哒！</p>
+					</div>
+				</div>
+				<div class="J-yongchebody32 fl" style="margin: 32px 0 0 0;">
+					<div class="J-yongchebody321 fl" style="background-position: 0 -140px;"></div>
+					<div class="J-yongchebody322 fr">
+						<p class="fl" style="width: 158px;">国外接送机</p>
+						<p class="fl" style="width: 140px;">任先生</p>
+						<p class="fr">2016-02-18</p>
+						<p class="fl" style="font-size: 12px;margin: 11px 0 0 0;color: #b0b0b0;">飞机因为天气原因晚点了，可是接车师傅依然没有怨言，很耐心的接到我。</p>
+						<p class="fl" style="font-size: 12px;margin: 11px 0 0 0;color: #b0b0b0;">还帮我把行李搬到了家，服务好赞，棒棒哒！</p>
+					</div>
+				</div>
+				<div class="J-yongchebody32 fr" style="margin: 32px 0 0 0;">
+					<div class="J-yongchebody321 fl" style="background-position: 0 -206px;"></div>
+					<div class="J-yongchebody322 fr">
+						<p class="fl" style="width: 158px;">国内租车</p>
+						<p class="fl" style="width: 140px;">门女士</p>
+						<p class="fr">2017-04-22</p>
+						<p class="fl" style="font-size: 12px;margin: 11px 0 0 0;color: #b0b0b0;">飞机因为天气原因晚点了，可是接车师傅依然没有怨言，很耐心的接到我。</p>
+						<p class="fl" style="font-size: 12px;margin: 11px 0 0 0;color: #b0b0b0;">还帮我把行李搬到了家，服务好赞，棒棒哒！</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!---->
+
+		<div class="bottom_container w ha oh">
+			<div class="bottom_content w">
+				<div class="bottom ma">
+					<div class="bottominner ma">
+						<div class="friend">
+							<div class="friend_title">旅游局合作</div>
+							<a href="#">
+								<p>&gt; 更多</p>
+							</a>
+						</div>
+						<hr class="index_hr1" />
+						<div class="partnerbox">
+							<div>
+								<img src="img/partner_03.png" />
+								<p>夏威夷旅游局</p>
+							</div>
+							<div>
+								<img src="img/partner_05.png" />
+								<p>华盛顿特区旅游局</p>
+							</div>
+							<div>
+								<img src="img/partner_07.png" />
+								<p>洛杉矶旅游局</p>
+							</div>
+							<div>
+								<img src="img/partner_09.png" />
+								<p>挪威旅游局</p>
+							</div>
+							<div>
+								<img src="img/partner_11.png" />
+								<p>新西兰旅游局</p>
+							</div>
+							<div>
+								<img src="img/partner_13.png" />
+								<p>香港旅游局</p>
+							</div>
+							<div>
+								<img src="img/partner_15.png" />
+								<p>加拿大旅游局</p>
+							</div>
+							<div style="margin-right: 0!important;">
+								<img src="img/partner_17.jpg" />
+								<p>澳大利亚北领地</p>
+							</div>
+						</div>
+					</div>
+					<hr class="index_hr2" />
+				</div>
+			</div>
+
+		</div>
+		<div class="bottom2_container w ha oh">
+			<div class="bottom2_content w">
+				<div class="bottom2 ma">
+					<div class="bottom2inner ma">
+						<div class="produce">
+							<div>
+								<img src="img/chanpintese_03.jpg" />
+								<div>阳光保证</div>
+							</div>
+							<div>
+								<img src="img/chanpintese_05.png" />
+								<div>产品丰富</div>
+							</div>
+							<div>
+								<img src="img/chanpintese_07.png" />
+								<div>卓越服务</div>
+							</div>
+							<div>
+								<img src="img/chanpintese_09.png" />
+								<div>预订价格保证</div>
+							</div>
+							<div>
+								<img src="img/chanpintese_11.png" />
+								<div>酒店升级保证</div>
+							</div>
+							<div>
+								<img src="img/chanpintese_13.png" />
+								<div>班级延误保证</div>
+							</div>
+							<div>
+								<img src="img/chanpintese_15.png" />
+								<div>特殊原因退订保证</div>
+							</div>
+							<div>
+								<img src="img/chanpintese_17.png" />
+								<div>不可抗力退订保障</div>
+							</div>
+							<div>
+								<img src="img/chanpintese_19.png" />
+								<div>重大灾害保障</div>
+							</div>
+						</div>
+						<div class="QA">
+							<dl class="QAbox">
+								<dt>预订常见问题</dt>
+								<dd>
+									<a href="#">纯玩是什么意思？</a>
+								</dd>
+								<dd>
+									<a href="#">单房差是什么？</a>
+								</dd>
+								<dd>
+									<a href="#">双飞、双卧都是什么意思？</a>
+								</dd>
+								<dd>
+									<a href="#">满意度是怎么计算的？</a>
+								</dd>
+							</dl>
+							<dl>
+								<dt>付款和发票</dt>
+								<dd>
+									<a href="#">签约可以刷卡吗？</a>
+								</dd>
+								<dd>
+									<a href="#">付款方式有哪些？</a>
+								</dd>
+								<dd>
+									<a href="#">怎么网上支付？</a>
+								</dd>
+								<dd>
+									<a href="#">如何获取发票？</a>
+								</dd>
+							</dl>
+							<dl>
+								<dt>签署旅游合同</dt>
+								<dd>
+									<a href="#" target="_blank">有旅游合同范本下载吗？</a>
+								</dd>
+								<dd>
+									<a href="#" target="_blank">门市地址在哪里？</a>
+								</dd>
+								<dd>
+									<a href="#" target="_blank">能传真签合同吗？</a>
+								</dd>
+								<dd>
+									<a href="#" target="_blank">可以不签合同吗？</a>
+								</dd>
+							</dl>
+							<dl>
+								<dt>旅游预订优惠政策</dt>
+								<dd>
+									<a href="#">什么是抵用券？</a>
+								</dd>
+								<dd>
+									<a href="#">途牛抵用券使用帮助</a>
+								</dd>
+								<dd>
+									<a href="#">什么是旅游券？</a>
+								</dd>
+								<dd>
+									<a href="#">如何获得旅游券？</a>
+								</dd>
+							</dl>
+							<dl>
+								<dt>其他事项</dt>
+								<dd>
+									<a href="#">签证相关问题解答</a>
+								</dd>
+								<dd>
+									<a href="#">旅游保险问题解答</a>
+								</dd>
+								<dd>
+									<a href="#">退款问题解答</a>
+								</dd>
+								<dd>
+									<a href="#">旅途中的问题</a>
+								</dd>
+							</dl>
+						</div>
+						<div class="bottom2_nav">
+							<dl class="bottom2_nav1">
+								<dt>去旅游</dt>
+								<div>
+									<dd>
+										<a href="#">跟团游</a>
+									</dd>
+									<dd>
+										<a href="#">海岛游</a>
+									</dd>
+									<dd>
+										<a href="#">门票</a>
+									</dd>
+									<dd>
+										<a href="#">机票+酒店</a>
+									</dd>
+									<dd>
+										<a href="#">小李推荐</a>
+									</dd>
+									<dd>
+										<a href="#">首付出发</a>
+									</dd>
+								</div>
+								<div>
+									<dd>
+										<a href="#">自助游</a>
+									</dd>
+									<dd>
+										<a href="#">机票</a>
+									</dd>
+									<dd>
+										<a href="#">亲子游</a>
+									</dd>
+									<dd>
+										<a href="#">蜜月游</a>
+									</dd>
+									<dd>
+										<a href="#">公司旅游</a>
+									</dd>
+									<dd>
+										<a href="#">当地玩乐</a>
+									</dd>
+								</div>
+								<div>
+									<dd>
+										<a href="#">美酒+美景</a>
+									</dd>
+									<dd>
+										<a href="#">游轮</a>
+									</dd>
+									<dd>
+										<a href="#">签证</a>
+									</dd>
+									<dd>
+										<a href="#">酒店</a>
+									</dd>
+									<dd>
+										<a href="#">牛人专线</a>
+									</dd>
+									<dd>
+										<a href="#">旅拍</a>
+									</dd>
+								</div>
+							</dl>
+							<dl class="bottom2_nav2">
+								<dt>寻优惠</dt>
+								<div>
+									<dd>
+										<a href="#">特卖</a>
+									</dd>
+									<dd>
+										<a href="#">订酒店返现金</a>
+									</dd>
+									<dd>
+										<a href="#">一元夺宝</a>
+									</dd>
+									<dd>
+										<a href="#">银行特惠券</a>
+									</dd>
+									<dd>
+										<a href="#">银行分期游</a>
+									</dd>
+
+								</div>
+							</dl>
+							<dl class="bottom2_nav3">
+								<dt>看攻略</dt>
+								<div>
+									<dd>
+										<a href="#">攻略</a>
+									</dd>
+									<dd>
+										<a href="#">简游向导</a>
+									</dd>
+									<dd>
+										<a href="#">游记</a>
+									</dd>
+									<dd>
+										<a href="#">达人玩法</a>
+									</dd>
+								</div>
+
+							</dl>
+							<dl class="bottom2_nav4">
+								<dt>查服务</dt>
+								<div>
+									<dd>
+										<a href="#">帮助中心</a>
+									</dd>
+									<dd>
+										<a href="#">积分俱乐部</a>
+									</dd>
+									<dd>
+										<a href="#">阳光保障</a>
+									</dd>
+									<dd>
+										<a href="#">火车时刻表</a>
+									</dd>
+									<dd>
+										<a href="#">航班查询</a>
+									</dd>
+								</div>
+							</dl>
+							<dl class="bottom2_nav5">
+								<dt>简游APP</dt>
+								<div>
+									<dd>
+										扫描下载简游APP
+									</dd>
+									<dd>
+										<img src="img/2weima_19.jpg" />
+									</dd>
+								</div>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom3_container w ha oh">
+			<div class="bottom3_content w">
+				<div class="bottom3 ma">
+					<div class="linkbox ma">
+						<a href="#">简游介绍</a>
+						<a href="#">合作伙伴</a>
+						<a href="#">新手指南</a>
+						<a href="#">加入我们</a>
+						<a href="#">新手上路</a>
+						<a href="#">网站地图</a>
+						<a href="#">免责声明</a>
+						<a href="#">版权声明</a>
+						<a href="#">联系我们</a>
+					</div>
+					<div class="bottom3box1 ma">
+						<p class="b3b1p1">2006-2017 © 简游网 ® JIANYOU.COM</p>
+						<p class="b3b1p2">津公网安备 11887765000044号</p>
+						<p class="b3b1p3">津ICP证070359号</p>
+						<p class="b3b1p4">互联网药品信息服务资格证编号（津）-经营性-2016-2008</p>
+					</div>
+					<div class="bottom3box2 ma">
+						<p class="b3b2p1">互联网出版许可证编号新出网证（津）字229号</p>
+						<p class="b3b2p2">出版物经营许可证</p>
+						<p class="b3b2p3">网络文化经营许可证津网文【2016】</p>
+						<p class="b3b2p4">违法和不良信息举报</p>
+					</div>
+					<div class="bottom3box3 ma">
+						<p class="b3b3p1">Copyright © 2006-2017 京东JD.com 版权所有</p>
+						<p class="b3b3p2">消费者维权热线：4006067733</p>
+						<p class="b3b3p3">经营证照</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
